@@ -16,7 +16,7 @@ export default async function Home() {
             key={`section-${index}`}
             id={slug}
             className={`w-full mx-auto p-8 sm:p-10 scroll-margin-top-20 ${
-              index % 2 === 0 ? "bg-gray-50" : "bg-white"
+              index % 2 === 0 ? "bg-white" : "bg-gray-50"
             }`}
           >
             <div className="items-center max-w-3xl mx-auto">

@@ -34,13 +34,13 @@ export default function Nav({ items = [] }: NavProps) {
     <>
       {/* PC用ナビゲーション */}
       <div className="hidden md:block">
-        <div className="flex items-center justify-between mx-16 md:mx-32">
+        <div className="flex items-center justify-between">
           <div className="flex gap-8 md:gap-16 items-center">
             {navItems.map((item, index) => (
               <a
                 key={`nav-${index}`}
                 href={`#${item.slug}`}
-                className="hover:text-blue-600 transition-colors"
+                className="hover:text-gray-400 transition-colors"
               >
                 {item.title}
               </a>

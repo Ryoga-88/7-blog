@@ -15,7 +15,7 @@ interface HeaderProps {
 export default function Header({ navItems = [] }: HeaderProps) {
   return (
     <>
-      <div className="w-full sticky top-0 z-50 bg-white">
+      <div className="w-full sticky top-0 z-50 bg-white py-2">
         <div className="flex items-center justify-between mx-8 md:mx-24 flex-wrap">
           <Logo />
           <Nav items={navItems} />

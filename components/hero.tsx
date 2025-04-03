@@ -3,21 +3,27 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <>
-      <div className="flex flex-row items-center w-full max-h-180">
+      <div className="flex flex-col sm:flex-row items-center w-full bg-gray-50">
         {/* 左側：テキスト部分 */}
-        <div className="w-1/2 p-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">これは左部分です</h2>
-          <p className="text-lg">ここにテキストコンテンツを追加できます</p>
+        <div className="w-full sm:w-1/2 p-6 sm:p-8 text-center sm:mb-0 min-h-[250px] flex flex-col justify-center">
+          <h2 className="text-2xl md:text-4xl font-bold mb-4">
+            <span>人と情報のソフトな</span>
+            <br className="sm:hidden" />
+            <span>インターフェース</span>
+          </h2>
+          <p className="text-lg md:text-xl">
+            人間のあいまいを科学し、
+            <br className="sm:hidden" />
+            確かな未来を創る
+          </p>
         </div>
 
         {/* 右側：画像部分 */}
-        <div className="w-1/2 max-h-[700px] overflow-hidden">
+        <div className="w-full sm:w-1/2 h-64 sm:h-96 md:h-[500px] lg:h-[600px] relative">
           <Image
-            src="/img/image.png"
+            src="/img/eyecatch.jpg"
             alt="Hero image"
-            layout="responsive"
-            width={961}
-            height={894}
+            fill
             className="object-cover"
           />
         </div>
