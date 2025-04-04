@@ -40,7 +40,7 @@ export default function Nav({ items = [] }: NavProps) {
               <a
                 key={`nav-${index}`}
                 href={`#${item.slug}`}
-                className="hover:text-gray-400 transition-colors"
+                className="hover:text-gray-500 hover:border-b-1 border-black transition-colors "
               >
                 {item.title}
               </a>

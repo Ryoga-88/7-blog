@@ -24,6 +24,9 @@ export default function Hero() {
             src="/img/eyecatch.jpg"
             alt="Hero image"
             fill
+            quality={90}
+            priority
+            sizes="(max-width: 640px) 100vw, 50vw"
             className="object-cover"
           />
         </div>
