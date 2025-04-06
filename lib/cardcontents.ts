@@ -24,7 +24,7 @@ export const getProjectCards: ProjectCard[] = [
     title: "Learning Algorithms Inspired by Human Cognition",
     description:
       "近年の学習アルゴリズムは、人間の学習枠組みを情報学的に洗練することで進化してきました。本研究では、認知的視点を取り入れたアプローチにより、従来の手法に改良を加えて効率的な学習プロセスの実現を探求します。神経細胞を模した要素がS字の迷路を進む様子に着目し、あいまいさをうまく活用することで、より効果的な学習方法の構築を目指しています。",
-    imageSrc: "/img/algorithms.jpg",
+    imageSrc: "/img/algorithms.png",
     link: "https://www.youtube.com/?app=desktop&hl=ja",
   },
 ];

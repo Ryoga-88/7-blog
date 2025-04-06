@@ -54,7 +54,7 @@ export default function Card({
       {/* 画像 - モバイルでは上部、PCでは左側 */}
       <div className="w-full md:w-1/3 h-48 md:h-full relative">
         <Image
-          className="object-cover rounded-t-lg md:rounded-t-none md:rounded-l-lg"
+          className="object-cover rounded-t-sm md:rounded-t-none md:rounded-l-sm"
           src={imageSrc}
           alt={title}
           fill
