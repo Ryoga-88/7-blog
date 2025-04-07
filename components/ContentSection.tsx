@@ -75,7 +75,7 @@ export default function ContentSection({
                       />
                     </div>
                     <div>
-                      <div className="text-base text-left dark:text-white mt-6 md:mt-0 md:ml-8">
+                      <div className="text-base text-left mt-6 md:mt-0 md:ml-8">
                         <div className="text-xl font-bold mb-2">
                           {locale === "ja"
                             ? "本多 克宏 (Katsuhiro Honda)"
@@ -119,7 +119,7 @@ export default function ContentSection({
                       />
                     </div>
                     <div>
-                      <div className="text-base text-left dark:text-white mt-6 md:mt-0 md:ml-8">
+                      <div className="text-base text-left mt-6 md:mt-0 md:ml-8">
                         <div className="text-xl font-bold mb-2">
                           {locale === "ja"
                             ? "生方 誠希 (Seiki Ubukata)"
