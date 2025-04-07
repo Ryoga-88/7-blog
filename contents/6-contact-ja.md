@@ -1,6 +1,7 @@
 ---
 title: "Contact"
 subtitle: "お問い合わせ"
+language: "ja"
 ---
 
 <ul>

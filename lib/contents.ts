@@ -20,87 +20,88 @@ const getSlugFromFileName = (fileName: string): string => {
   return match ? match[1] : fileName.replace(/\.md$/, "");
 };
 
-const getSlugFromPath = (filePath: string): string => {
-  const relativePath = path.relative(contentsDirectory, filePath);
-  return getSlugFromFileName(relativePath);
-};
+// const getSlugFromPath = (filePath: string): string => {
+//   const relativePath = path.relative(contentsDirectory, filePath);
+//   return getSlugFromFileName(relativePath);
+// };
 
-const getAllFiles = (dir: string): string[] => {
-  const files: string[] = [];
-  const items = fs.readdirSync(dir);
+// const getAllFiles = (dir: string): string[] => {
+//   const files: string[] = [];
+//   const items = fs.readdirSync(dir);
 
-  items.forEach((item) => {
-    const fullPath = path.join(dir, item);
-    if (fs.statSync(fullPath).isDirectory()) {
-      files.push(...getAllFiles(fullPath));
-    } else if (item.endsWith(".md")) {
-      files.push(fullPath);
-    }
-  });
+//   items.forEach((item) => {
+//     const fullPath = path.join(dir, item);
+//     if (fs.statSync(fullPath).isDirectory()) {
+//       files.push(...getAllFiles(fullPath));
+//     } else if (item.endsWith(".md")) {
+//       files.push(fullPath);
+//     }
+//   });
 
-  return files;
-};
+//   return files;
+// };
 
-const getContentBySlug = async (
-  slug: string
-): Promise<ContentObject | null> => {
-  const findFile = (searchSlug: string): string | null => {
-    const files = getAllFiles(contentsDirectory);
-    return (
-      files.find((file) => {
-        const fileSlug = getSlugFromPath(file).replace(/\.md$/, "");
-        return fileSlug === searchSlug;
-      }) || null
-    );
-  };
+// const getContentBySlug = async (
+//   slug: string
+// ): Promise<ContentObject | null> => {
+//   const findFile = (searchSlug: string): string | null => {
+//     const files = getAllFiles(contentsDirectory);
+//     return (
+//       files.find((file) => {
+//         const fileSlug = getSlugFromPath(file).replace(/\.md$/, "");
+//         return fileSlug === searchSlug;
+//       }) || null
+//     );
+//   };
 
-  const filePath = findFile(slug);
-  if (!filePath) return null;
+//   const filePath = findFile(slug);
+//   if (!filePath) return null;
 
-  const fileContents = fs.readFileSync(filePath, "utf8");
-  const matterResult = matter(fileContents);
+//   const fileContents = fs.readFileSync(filePath, "utf8");
+//   const matterResult = matter(fileContents);
+//   console.log(matterResult);
 
-  return {
-    slug: slug,
-    title: matterResult.data.title,
-    subtitle: matterResult.data.subtitle,
-    image: matterResult.data.image,
-    html: md.render(matterResult.content).toString(),
-  };
-};
+//   return {
+//     slug: slug,
+//     title: matterResult.data.title,
+//     subtitle: matterResult.data.subtitle,
+//     image: matterResult.data.image,
+//     html: md.render(matterResult.content).toString(),
+//   };
+// };
 
-const getAllContentSlugs = async (): Promise<string[]> => {
-  const files = getAllFiles(contentsDirectory).filter((f) =>
-    /(?:^\d+-.*\.md$|[^/]+\.md$)/.test(path.basename(f))
-  );
+// const getAllContentSlugs = async (): Promise<string[]> => {
+//   const files = getAllFiles(contentsDirectory).filter((f) =>
+//     /(?:^\d+-.*\.md$|[^/]+\.md$)/.test(path.basename(f))
+//   );
+//   console.log(files);
+//   return files.map((file) => getSlugFromPath(file).replace(/\.md$/, ""));
+// };
 
-  return files.map((file) => getSlugFromPath(file).replace(/\.md$/, ""));
-};
+// const getRootContents = async (): Promise<ContentObject[]> => {
+//   const filePaths = fs
+//     .readdirSync(contentsDirectory)
+//     .filter((f) => /^(?:\d+-)?.+\.md$/.test(f))
+//     .map((f) => path.join(contentsDirectory, f))
+//     .sort((a, b) => {
+//       if (a > b) return 1;
+//       return -1;
+//     });
 
-const getRootContents = async (): Promise<ContentObject[]> => {
-  const filePaths = fs
-    .readdirSync(contentsDirectory)
-    .filter((f) => /^(?:\d+-)?.+\.md$/.test(f))
-    .map((f) => path.join(contentsDirectory, f))
-    .sort((a, b) => {
-      if (a > b) return 1;
-      return -1;
-    });
+//   const contents = filePaths.map((filePath) => {
+//     const fileContents = fs.readFileSync(filePath, "utf8");
+//     const matterResult = matter(fileContents);
+//     return {
+//       slug: getSlugFromPath(filePath).replace(/\.md$/, ""),
+//       title: matterResult.data.title,
+//       subtitle: matterResult.data.subtitle,
+//       image: matterResult.data.image,
+//       html: md.render(matterResult.content).toString(),
+//     };
+//   });
 
-  const contents = filePaths.map((filePath) => {
-    const fileContents = fs.readFileSync(filePath, "utf8");
-    const matterResult = matter(fileContents);
-    return {
-      slug: getSlugFromPath(filePath).replace(/\.md$/, ""),
-      title: matterResult.data.title,
-      subtitle: matterResult.data.subtitle,
-      image: matterResult.data.image,
-      html: md.render(matterResult.content).toString(),
-    };
-  });
-
-  return contents;
-};
+//   return contents;
+// };
 // 画像タグと段落タグの後に余白を追加する関数を定義
 function addSpacingToHtml(html: string): string {
   // 画像タグの後に余白を追加
@@ -140,7 +141,7 @@ function addSpacingToHtml(html: string): string {
 const getSortedContents = async (): Promise<ContentObject[]> => {
   const fileNames = fs
     .readdirSync(path.join(contentsDirectory))
-    .filter((f) => /^(\d+)-(.*)\.md$/.test(f));
+    .filter((f) => /^(\d+)-(.*)-(ja|en)\.md$/.test(f));
 
   const contents = fileNames
     .map((fileName) => {
@@ -148,7 +149,6 @@ const getSortedContents = async (): Promise<ContentObject[]> => {
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const matterResult = matter(fileContents);
 
-      // HTMLをレンダリングした後、画像と段落の後に余白を追加
       const renderedHtml = md.render(matterResult.content).toString();
       const htmlWithSpacing = addSpacingToHtml(renderedHtml);
 
@@ -156,9 +156,10 @@ const getSortedContents = async (): Promise<ContentObject[]> => {
         fileName: fileName,
         title: matterResult.data.title,
         subtitle: matterResult.data.subtitle,
+        language: matterResult.data.language,
         slug: getSlugFromFileName(fileName),
         image: matterResult.data.image,
-        html: htmlWithSpacing, // 修正したHTMLを使用
+        html: htmlWithSpacing,
       };
     })
     .sort((a, b) => {
@@ -173,8 +174,8 @@ const getSortedContents = async (): Promise<ContentObject[]> => {
 };
 
 export {
-  getContentBySlug,
-  getAllContentSlugs,
-  getRootContents,
+  // getContentBySlug,
+  // getAllContentSlugs,
+  // getRootContents,
   getSortedContents,
 };

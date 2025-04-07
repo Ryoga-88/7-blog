@@ -1,21 +1,25 @@
 import Header from "@/components/header";
-import { getSortedContents } from "../lib/contents";
-import { getProjectCards } from "../lib/cardcontents";
+import { getSortedContents } from "@/lib/contents";
+import { getProjectCards } from "@/lib/cardcontents";
 import Footer from "@/components/footer";
 import Hero from "@/components/hero";
 import Card from "@/components/card";
 import Image from "next/image";
 
 export default async function Home() {
+  const locale = "ja";
   const contents = await getSortedContents();
+  const filteredContents = contents.filter(
+    (content) => content.language === locale
+  );
   const projectCards = getProjectCards;
 
   return (
     <>
-      <Header navItems={contents} />
+      <Header navItems={filteredContents} />
       <Hero />
       <div className="flex flex-col items-center min-h-screen gap-6 font-[family-name:var(--font-geist-sans)]">
-        {contents.map(({ title, subtitle, html, slug }, index) => (
+        {filteredContents.map(({ title, subtitle, html, slug }, index) => (
           <section
             key={`section-${index}`}
             id={slug}

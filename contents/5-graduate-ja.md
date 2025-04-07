@@ -1,6 +1,7 @@
 ---
 title: "Graduate"
 subtitle: "大学院生の就職先"
+language: "ja"
 ---
 
 <table style="width:100%; border-collapse:collapse;">
