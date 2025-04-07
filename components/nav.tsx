@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface NavItem {
   title: string;
@@ -9,9 +10,12 @@ interface NavItem {
 
 interface NavProps {
   items?: NavItem[];
+  locale?: string | string[];
 }
 
-export default function Nav({ items = [] }: NavProps) {
+export default function Nav({ items = [], locale }: NavProps) {
+  // 現在の言語を取得
+  const currentLocale = typeof locale === "string" ? locale : "ja";
   // メニュー開閉状態の管理
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,6 +49,9 @@ export default function Nav({ items = [] }: NavProps) {
                 {item.title}
               </a>
             ))}
+          </div>
+          <div className="ml-8">
+            <LanguageSwitcher currentLocale={currentLocale} />
           </div>
         </div>
       </div>
@@ -99,7 +106,7 @@ export default function Nav({ items = [] }: NavProps) {
             <a
               key={`mobile-nav-${index}`}
               href={`#${item.slug}`}
-              className="text-lg hover:text-blue-600 transition-colors"
+              className="text-lg text-neutral-600 transition-colors"
               onClick={() => {
                 // リンククリック時にメニューを閉じる
                 setIsOpen(false);
@@ -108,6 +115,9 @@ export default function Nav({ items = [] }: NavProps) {
               {item.title}
             </a>
           ))}
+          <div className="mt-4">
+            <LanguageSwitcher currentLocale={currentLocale} />
+          </div>
         </div>
       </div>
 

@@ -10,15 +10,19 @@ interface NavItem {
 
 interface HeaderProps {
   navItems?: NavItem[];
+  currentLocale?: string;
 }
 
-export default function Header({ navItems = [] }: HeaderProps) {
+export default function Header({
+  navItems = [],
+  currentLocale = "ja",
+}: HeaderProps) {
   return (
     <>
       <div className="w-full sticky top-0 z-50 bg-white py-2">
         <div className="flex items-center justify-between mx-4 md:mx-24 flex-wrap">
           <Logo />
-          <Nav items={navItems} />
+          <Nav items={navItems} locale={currentLocale} />
         </div>
       </div>
     </>

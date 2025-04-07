@@ -1,20 +1,44 @@
 import Image from "next/image";
 
-export default function Hero() {
+interface Content {
+  locale: string;
+}
+
+export default function Hero({ locale }: Content) {
   return (
     <>
       <div className="flex flex-col sm:flex-row items-center w-full bg-gray-50">
         {/* 左側：テキスト部分 */}
         <div className="w-full sm:w-1/2 p-6 sm:p-8 text-center sm:mb-0 min-h-[250px] flex flex-col justify-center">
           <h2 className="text-2xl md:text-4xl font-bold mb-4">
-            <span>人と情報のソフトな</span>
+            <span>
+              {locale === "ja" ? (
+                <>人と情報のソフトな</>
+              ) : (
+                <>A Soft Interface </>
+              )}
+            </span>
             <br className="sm:hidden" />
-            <span>インターフェース</span>
+            <span>
+              {locale === "ja" ? (
+                <>インターフェース</>
+              ) : (
+                <>between People and Information</>
+              )}
+            </span>
           </h2>
           <p className="text-lg md:text-xl">
-            人間のあいまいを科学し、
+            {locale === "ja" ? (
+              <>人間のあいまいを科学し、</>
+            ) : (
+              <>Harnessing Science to Explore Human Ambiguity </>
+            )}
             <br className="sm:hidden" />
-            確かな未来を創る
+            {locale === "ja" ? (
+              <>確かな未来を創る</>
+            ) : (
+              <>and Create a Certain Future</>
+            )}
           </p>
         </div>
 

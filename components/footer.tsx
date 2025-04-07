@@ -18,8 +18,7 @@ function Footer() {
           onClick={scrollToTop}
         >
           <MdOutlineCopyright />
-          2025 &nbsp;|&nbsp; Human Information Systems Lab.&nbsp;All Rights
-          Reserved.
+          2025 &nbsp;|&nbsp; HI Lab.&nbsp;All Rights Reserved.
         </div>
       </div>
     </footer>
