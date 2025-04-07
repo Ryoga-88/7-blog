@@ -1,4 +1,4 @@
 ---
 title: "Members"
-subtitle: "メンバー"
+subtitle: "研究室の教員紹介"
 ---
