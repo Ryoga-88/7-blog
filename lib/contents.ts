@@ -3,7 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import MarkdownIt from "markdown-it";
 import markdownitExternalLink from "markdown-it-external-link";
-import { ContentObject } from "./type";
+import { ContentObject, Professor, ProjectCard } from "./type";
 
 const contentsDirectory = path.join(process.cwd(), "contents");
 
@@ -19,89 +19,6 @@ const getSlugFromFileName = (fileName: string): string => {
   const match = fileName.match(/^(?:\d+-)?(.+)\.md$/);
   return match ? match[1] : fileName.replace(/\.md$/, "");
 };
-
-// const getSlugFromPath = (filePath: string): string => {
-//   const relativePath = path.relative(contentsDirectory, filePath);
-//   return getSlugFromFileName(relativePath);
-// };
-
-// const getAllFiles = (dir: string): string[] => {
-//   const files: string[] = [];
-//   const items = fs.readdirSync(dir);
-
-//   items.forEach((item) => {
-//     const fullPath = path.join(dir, item);
-//     if (fs.statSync(fullPath).isDirectory()) {
-//       files.push(...getAllFiles(fullPath));
-//     } else if (item.endsWith(".md")) {
-//       files.push(fullPath);
-//     }
-//   });
-
-//   return files;
-// };
-
-// const getContentBySlug = async (
-//   slug: string
-// ): Promise<ContentObject | null> => {
-//   const findFile = (searchSlug: string): string | null => {
-//     const files = getAllFiles(contentsDirectory);
-//     return (
-//       files.find((file) => {
-//         const fileSlug = getSlugFromPath(file).replace(/\.md$/, "");
-//         return fileSlug === searchSlug;
-//       }) || null
-//     );
-//   };
-
-//   const filePath = findFile(slug);
-//   if (!filePath) return null;
-
-//   const fileContents = fs.readFileSync(filePath, "utf8");
-//   const matterResult = matter(fileContents);
-//   console.log(matterResult);
-
-//   return {
-//     slug: slug,
-//     title: matterResult.data.title,
-//     subtitle: matterResult.data.subtitle,
-//     image: matterResult.data.image,
-//     html: md.render(matterResult.content).toString(),
-//   };
-// };
-
-// const getAllContentSlugs = async (): Promise<string[]> => {
-//   const files = getAllFiles(contentsDirectory).filter((f) =>
-//     /(?:^\d+-.*\.md$|[^/]+\.md$)/.test(path.basename(f))
-//   );
-//   console.log(files);
-//   return files.map((file) => getSlugFromPath(file).replace(/\.md$/, ""));
-// };
-
-// const getRootContents = async (): Promise<ContentObject[]> => {
-//   const filePaths = fs
-//     .readdirSync(contentsDirectory)
-//     .filter((f) => /^(?:\d+-)?.+\.md$/.test(f))
-//     .map((f) => path.join(contentsDirectory, f))
-//     .sort((a, b) => {
-//       if (a > b) return 1;
-//       return -1;
-//     });
-
-//   const contents = filePaths.map((filePath) => {
-//     const fileContents = fs.readFileSync(filePath, "utf8");
-//     const matterResult = matter(fileContents);
-//     return {
-//       slug: getSlugFromPath(filePath).replace(/\.md$/, ""),
-//       title: matterResult.data.title,
-//       subtitle: matterResult.data.subtitle,
-//       image: matterResult.data.image,
-//       html: md.render(matterResult.content).toString(),
-//     };
-//   });
-
-//   return contents;
-// };
 // 画像タグと段落タグの後に余白を追加する関数を定義
 function addSpacingToHtml(html: string): string {
   // 画像タグの後に余白を追加
@@ -138,7 +55,7 @@ function addSpacingToHtml(html: string): string {
   return processedHtml;
 }
 
-const getSortedContents = async (): Promise<ContentObject[]> => {
+export const getSortedContents = async (): Promise<ContentObject[]> => {
   const fileNames = fs
     .readdirSync(path.join(contentsDirectory))
     .filter((f) => /^(\d+)-(.*)-(ja|en)\.md$/.test(f));
@@ -173,9 +90,75 @@ const getSortedContents = async (): Promise<ContentObject[]> => {
   return contents;
 };
 
-export {
-  // getContentBySlug,
-  // getAllContentSlugs,
-  // getRootContents,
-  getSortedContents,
+export const getProjectCards = (
+  contents: ContentObject[],
+  locale: string
+): ProjectCard[] => {
+  const projectContent = contents.find(
+    (content) => content.title === "Activities" && content.language === locale
+  );
+
+  if (!projectContent) return [];
+
+  const fileContents = fs.readFileSync(
+    path.join(process.cwd(), "contents", `2-activities-${locale}.md`),
+    "utf8"
+  );
+  const matterResult = matter(fileContents);
+
+  if (matterResult.data.card) {
+    return matterResult.data.card.map(
+      (card: {
+        title: string;
+        description: string;
+        imageSrc: string;
+        link?: string;
+      }) => ({
+        title: card.title,
+        description: card.description,
+        imageSrc: card.imageSrc,
+        link: card.link || "",
+      })
+    );
+  }
+
+  return [];
+};
+
+// 教授情報を取得する関数
+export const getProfessors = (
+  contents: ContentObject[],
+  locale: string
+): Professor[] => {
+  const membersContent = contents.find(
+    (content) => content.title === "Members" && content.language === locale
+  );
+
+  if (!membersContent) return [];
+
+  const fileContents = fs.readFileSync(
+    path.join(process.cwd(), "contents", `3-members-${locale}.md`),
+    "utf8"
+  );
+  const matterResult = matter(fileContents);
+
+  if (matterResult.data.professors) {
+    return matterResult.data.professors.map(
+      (prof: {
+        name: string;
+        position: string;
+        description: string;
+        image: string;
+        url: string;
+      }) => ({
+        name: prof.name,
+        position: prof.position,
+        description: prof.description,
+        image: prof.image,
+        url: prof.url,
+      })
+    );
+  }
+
+  return [];
 };

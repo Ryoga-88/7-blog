@@ -2,13 +2,7 @@
 import React, { useState, ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-interface CardProps {
-  imageSrc: string;
-  title: string;
-  description: string;
-  link?: string;
-}
+import { ProjectCard } from "@/lib/type";
 
 interface CardWrapperProps {
   children: ReactNode;
@@ -16,11 +10,11 @@ interface CardWrapperProps {
 }
 
 export default function Card({
-  imageSrc,
   title,
   description,
+  imageSrc,
   link,
-}: CardProps) {
+}: ProjectCard) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   // 説明文の短縮版と完全版
