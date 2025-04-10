@@ -29,11 +29,11 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: "Human Information Systems Laboratory/人間情報システム研究室",
+    title: "人間情報システム研究室/Human Information Systems Laboratory",
     description:
       "大阪公立大学大学院 情報学研究科 人間情報システム研究室(Human Information Systems Laboratory)では，ファジィ理論と多変量解析法との融合手法による，大規模データベースからの知識発見，人間のあいまいな価値判断を含む感性情報の処理を実現するデータ解析法，認知モデルや感性モデルに基づいたエージェントシミュレーションや学習アルゴリズム，情報メディアの開発などの研究を行っています．",
     url: "https://his-lab.vercel.app/",
-    siteName: "Human Information Systems Laboratory/人間情報システム研究室",
+    siteName: "人間情報システム研究室/Human Information Systems Laboratory",
     images: [
       {
         url: "https://his-lab.vercel.app/img/eyecatch.jpg",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Human Information Systems Laboratory/人間情報システム研究室",
+    title: "人間情報システム研究室/Human Information Systems Laboratory",
     description:
       "大阪公立大学大学院 情報学研究科 人間情報システム研究室(Human Information Systems Laboratory)では，ファジィ理論と多変量解析法との融合手法による，大規模データベースからの知識発見，人間のあいまいな価値判断を含む感性情報の処理を実現するデータ解析法，認知モデルや感性モデルに基づいたエージェントシミュレーションや学習アルゴリズム，情報メディアの開発などの研究を行っています．",
     creator: "@ryoga_8723",
