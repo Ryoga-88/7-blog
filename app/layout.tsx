@@ -27,7 +27,7 @@ export default function RootLayout({
         {/* Google Search Console 所有権確認用タグ */}
         <meta
           name="google-site-verification"
-          content="duIULWMuN87iNsRpBQM9ChtbDg1qQ-Ct15oLlqt5HV0"
+          content="S2Fh7s0Q-33hlV1A8lsORIhjitoh-spczARETbbT-cE"
         />
 
         {/* 外部リソース */}
