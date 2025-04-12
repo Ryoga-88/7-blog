@@ -1,0 +1,21 @@
+{
+  "name": "人間情報システム研究室",
+  "short_name": "HIS Lab",
+  "description": "大阪公立大学大学院 情報学研究科 人間情報システム研究室",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

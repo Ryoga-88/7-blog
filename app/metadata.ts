@@ -25,8 +25,38 @@ export const metadata: Metadata = {
     "Ryoga",
   ],
   authors: [{ name: "花房亮雅 (Ryoga Hanafusa)" }],
+  creator: "花房亮雅 (Ryoga Hanafusa)",
+  publisher: "大阪公立大学大学院 情報学研究科 人間情報システム研究室",
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+    other: [
+      {
+        rel: "icon",
+        url: "/icon-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        rel: "icon",
+        url: "/icon-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+    ],
   },
   openGraph: {
     title: "人間情報システム研究室/Human Information Systems Laboratory",
@@ -61,6 +91,10 @@ export const metadata: Metadata = {
       "en-US": "/en",
     },
   },
+  verification: {
+    google: "S2Fh7s0Q-33hlV1A8lsORIhjitoh-spczARETbbT-cE",
+  },
+  category: "education",
 };
 
 // viewportの設定
@@ -69,4 +103,5 @@ export const viewport: Viewport = {
   themeColor: "#3B82F6",
   width: "device-width",
   initialScale: 1,
+  maximumScale: 5,
 };
